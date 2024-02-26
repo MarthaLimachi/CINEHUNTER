@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor de Videos</title>
+    <style>
+        /* Estilos CSS para los botones */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor para el video -->
+    <div id="video-container">
+        <iframe id="video-iframe" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <!-- Botones de control -->
+    <div class="controls">
+        <button id="anterior">Anterior</button>
+        <button id="siguiente">Siguiente</button>
+    </div>
+
+    <!-- Scripts para controlar los videos -->
+    <script>
+        const videos = [
+            "https://ok.ru/videoembed/5828617046755",
+            "https://ok.ru/videoembed/5828616981219",
+            "https://ok.ru/videoembed/5828616915683",
+            "https://ok.ru/videoembed/5828617112291"
+        ];
+        let currentVideoIndex = 0;
+
+        const videoIframe = document.getElementById("video-iframe");
+        const btnAnterior = document.getElementById("anterior");
+        const btnSiguiente = document.getElementById("siguiente");
+
+        function cargarVideo(index) {
+            videoIframe.src = videos[index];
+        }
+
+        btnAnterior.addEventListener("click", () => {
+            currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+            cargarVideo(currentVideoIndex);
+        });
+
+        btnSiguiente.addEventListener("click", () => {
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            cargarVideo(currentVideoIndex);
+        });
+
+        // Cargar el primer video al cargar la página
+        cargarVideo(currentVideoIndex);
+    </script>
+</body>
+</html>
